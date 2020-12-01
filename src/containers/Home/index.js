@@ -1,12 +1,22 @@
-import { Box, Container, TextField, Grid, colors } from "@material-ui/core";
+import {
+  Box,
+  Container,
+  TextField,
+  Grid,
+  colors,
+  Button,
+} from "@material-ui/core";
 import React, { useEffect, useState, useContext } from "react";
 import CommandCard from "../../components/CommandCard";
 import teal from "@material-ui/core/colors/teal";
+import green from "@material-ui/core/colors/green";
+import AddIcon from "@material-ui/icons/Add";
 
 const Home = (props) => {
   const [whatsAppId, setWhatsappId] = useState("019992323");
   const [greetingRowAmount, setGreetingRowAmount] = useState(7);
   const accent = teal[600];
+  const buttonSaveColor = green[300];
 
   return (
     <Box
@@ -21,12 +31,11 @@ const Home = (props) => {
     >
       <Box
         boxShadow={10}
-        // height="90%"
+        borderRadius={16}
         width="55%"
         p={3}
         m={3}
         display="flex"
-        //   wrap="nowrap"
         alignItems="flex-start"
         style={{
           position: "absolute",
@@ -38,7 +47,8 @@ const Home = (props) => {
         <Grid
           container
           spacing={5}
-          justify="stretched"
+          direction="row"
+          justify="center"
           width="100%"
           style={{ margin: 10 }}
         >
@@ -69,6 +79,26 @@ const Home = (props) => {
           </Grid>
           <Grid item xs={12}>
             <CommandCard />
+          </Grid>
+          <Grid item xs={4}></Grid>
+          <Grid item xs={4}>
+            <Button color="black" startIcon={<AddIcon />}>
+              ADD MORE COMMAND
+            </Button>
+          </Grid>
+          <Grid item xs={4}></Grid>
+          <Grid item xs={2}>
+            <Button variant="contained" color="primary">
+              CANCEL
+            </Button>
+          </Grid>
+          <Grid item xs={2}>
+            <Button
+              variant="contained"
+              style={{ backgroundColor: buttonSaveColor }}
+            >
+              SAVE
+            </Button>
           </Grid>
         </Grid>
       </Box>
