@@ -1,15 +1,28 @@
 import { Box, Container, TextField, Grid, colors } from "@material-ui/core";
 import React, { useEffect, useState, useContext } from "react";
+import CommandCard from "../../components/CommandCard";
+import teal from "@material-ui/core/colors/teal";
 
 const Home = (props) => {
   const [whatsAppId, setWhatsappId] = useState("019992323");
   const [greetingRowAmount, setGreetingRowAmount] = useState(7);
+  const accent = teal[600];
+
   return (
-    <Box height="100%" width="100%" display="flex">
+    <Box
+      height={200}
+      width="100%"
+      //   display="flex"
+      style={{
+        margin: 0,
+        position: "absolute",
+        backgroundColor: accent,
+      }}
+    >
       <Box
         boxShadow={10}
-        height="90%"
-        // width="50%"
+        // height="90%"
+        width="55%"
         p={3}
         m={3}
         display="flex"
@@ -24,7 +37,7 @@ const Home = (props) => {
       >
         <Grid
           container
-          spacing={2}
+          spacing={5}
           justify="stretched"
           width="100%"
           style={{ margin: 10 }}
@@ -34,6 +47,7 @@ const Home = (props) => {
           </Grid>
           <Grid item xs={12}>
             <TextField
+              InputLabelProps={{ shrink: true }}
               fullWidth={true}
               id="outlined-multiline-static"
               label="Starting text of the bot menu"
@@ -46,6 +60,15 @@ const Home = (props) => {
           </Grid>
           <Grid item xs={12}>
             Command list
+          </Grid>
+          <Grid item xs={12}>
+            <CommandCard />
+          </Grid>
+          <Grid item xs={12}>
+            <CommandCard />
+          </Grid>
+          <Grid item xs={12}>
+            <CommandCard />
           </Grid>
         </Grid>
       </Box>
