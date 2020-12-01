@@ -1,7 +1,8 @@
 import "./App.css";
+import { Button } from "@material-ui/core";
+import Home from "./containers/Home";
 
 function App() {
-  return <div className="App">WhatsApp Bot Builder!</div>;
+  return <Home />;
 }
-
 export default App;
