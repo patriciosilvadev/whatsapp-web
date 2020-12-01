@@ -1,11 +1,4 @@
-import {
-  Box,
-  Container,
-  TextField,
-  Grid,
-  colors,
-  Button,
-} from "@material-ui/core";
+import { Box, TextField, Grid, Button } from "@material-ui/core";
 import React, { useEffect, useState, useContext } from "react";
 import CommandCard from "../../components/CommandCard";
 import teal from "@material-ui/core/colors/teal";
@@ -15,8 +8,38 @@ import AddIcon from "@material-ui/icons/Add";
 const Home = (props) => {
   const [whatsAppId, setWhatsappId] = useState("019992323");
   const [greetingRowAmount, setGreetingRowAmount] = useState(7);
+
+  const [commandCardList, setCommandCardList] = useState([]);
+
+  // Colors
   const accent = teal[600];
   const buttonSaveColor = green[300];
+
+  const addCommand = () => {
+    const updatedCommandCardList = commandCardList.concat({
+      command: "",
+      reply: "",
+    });
+    setCommandCardList(updatedCommandCardList);
+  };
+
+  const handleDeleteCommand = (removedIndex) => {
+    const updatedCommandCardList = commandCardList.filter(
+      (element, index) => index !== removedIndex
+    );
+    console.log(removedIndex);
+    console.log(updatedCommandCardList);
+    setCommandCardList(updatedCommandCardList);
+  };
+
+  const renderCommands = () => {
+    const commands = commandCardList.map((element, index) => (
+      <Grid item xs={12}>
+        <CommandCard id={index} onDeleteCommand={handleDeleteCommand} />
+      </Grid>
+    ));
+    return commands;
+  };
 
   return (
     <Box
@@ -46,7 +69,7 @@ const Home = (props) => {
       >
         <Grid
           container
-          spacing={5}
+          spacing={2}
           direction="row"
           justify="center"
           width="100%"
@@ -71,18 +94,15 @@ const Home = (props) => {
           <Grid item xs={12}>
             Command list
           </Grid>
-          <Grid item xs={12}>
-            <CommandCard />
-          </Grid>
-          <Grid item xs={12}>
-            <CommandCard />
-          </Grid>
-          <Grid item xs={12}>
-            <CommandCard />
-          </Grid>
+          {renderCommands()}
+
           <Grid item xs={4}></Grid>
           <Grid item xs={4}>
-            <Button color="black" startIcon={<AddIcon />}>
+            <Button
+              onClick={() => addCommand()}
+              color="black"
+              startIcon={<AddIcon />}
+            >
               ADD MORE COMMAND
             </Button>
           </Grid>

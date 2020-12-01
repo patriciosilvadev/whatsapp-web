@@ -9,20 +9,10 @@ import {
 } from "@material-ui/core";
 import grey from "@material-ui/core/colors/grey";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { createMuiTheme } from "@material-ui/core/styles";
 import React, { useState } from "react";
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      // Purple and green play nicely together.
-      main: grey[50],
-    },
-  },
-});
-
-const CommandCard = (props) => {
-  const { commandIndex } = props;
+const CommandCard = ({ id, onDeleteCommand }) => {
   const [type, setType] = useState("Text message");
   const commandTypes = [
     { type: "Text message" },
@@ -49,7 +39,7 @@ const CommandCard = (props) => {
             fullWidth={true}
             id="outlined-multiline-static"
             label="Command"
-            defaultValue={commandIndex}
+            defaultValue={id + 1}
             variant="outlined"
           />
         </Grid>
@@ -81,7 +71,11 @@ const CommandCard = (props) => {
           />
         </Grid>
         <Grid item xs={2.5} display="flex">
-          <Button color="secondary" startIcon={<DeleteIcon />}>
+          <Button
+            onClick={() => onDeleteCommand(id)}
+            color="secondary"
+            startIcon={<DeleteIcon />}
+          >
             Delete
           </Button>
         </Grid>
