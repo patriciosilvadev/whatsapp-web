@@ -12,7 +12,12 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { createMuiTheme } from "@material-ui/core/styles";
 import React, { useState } from "react";
 
-const CommandCard = ({ id, onDeleteCommand }) => {
+const CommandCard = ({
+  id,
+  onDeleteCommand,
+  onCommandTextChange,
+  onReplyTextChange,
+}) => {
   const [type, setType] = useState("Text message");
   const commandTypes = [
     { type: "Text message" },
@@ -34,6 +39,9 @@ const CommandCard = ({ id, onDeleteCommand }) => {
       >
         <Grid item xs={6}>
           <TextField
+            onChange={(e) => {
+              onCommandTextChange(id, e.target.value);
+            }}
             required
             InputLabelProps={{ shrink: true }}
             fullWidth={true}
@@ -60,6 +68,9 @@ const CommandCard = ({ id, onDeleteCommand }) => {
         </Grid>
         <Grid item xs={12} display="flex">
           <TextField
+            onChange={(e) => {
+              onReplyTextChange(id, e.target.value);
+            }}
             display="flex"
             fullWidth
             InputLabelProps={{ shrink: true }}

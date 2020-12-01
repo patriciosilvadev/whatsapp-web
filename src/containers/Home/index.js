@@ -32,13 +32,40 @@ const Home = (props) => {
     setCommandCardList(updatedCommandCardList);
   };
 
+  const handleCommandTextChange = (changedCommandIndex, commandText) => {
+    const updatedCommandCardList = commandCardList.map((element, index) => {
+      if (changedCommandIndex === index)
+        return { command: commandText, reply: element.reply };
+      return element;
+    });
+    setCommandCardList(updatedCommandCardList);
+  };
+
+  const handleReplyTextChange = (changedReplyIndex, replyText) => {
+    const updatedCommandCardList = commandCardList.map((element, index) => {
+      if (changedReplyIndex === index)
+        return { command: element.command, reply: replyText };
+      return element;
+    });
+    setCommandCardList(updatedCommandCardList);
+  };
+
   const renderCommands = () => {
     const commands = commandCardList.map((element, index) => (
       <Grid item xs={12}>
-        <CommandCard id={index} onDeleteCommand={handleDeleteCommand} />
+        <CommandCard
+          id={index}
+          onDeleteCommand={handleDeleteCommand}
+          onCommandTextChange={handleCommandTextChange}
+          onReplyTextChange={handleReplyTextChange}
+        />
       </Grid>
     ));
     return commands;
+  };
+
+  const handleSave = () => {
+    console.log(commandCardList);
   };
 
   return (
@@ -114,6 +141,7 @@ const Home = (props) => {
           </Grid>
           <Grid item xs={2}>
             <Button
+              onClick={() => handleSave()}
               variant="contained"
               style={{ backgroundColor: buttonSaveColor }}
             >
