@@ -44,11 +44,12 @@ const CommandCard = (props) => {
       >
         <Grid item xs={6}>
           <TextField
+            required
             InputLabelProps={{ shrink: true }}
             fullWidth={true}
             id="outlined-multiline-static"
-            label="Starting text of the bot menu"
-            defaultValue=""
+            label="Command"
+            defaultValue={commandIndex}
             variant="outlined"
           />
         </Grid>
