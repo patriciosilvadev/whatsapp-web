@@ -1,14 +1,14 @@
 import { Box, TextField, Grid, Button } from "@material-ui/core";
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState } from "react";
 import CommandCard from "../../components/CommandCard";
 import teal from "@material-ui/core/colors/teal";
 import green from "@material-ui/core/colors/green";
 import AddIcon from "@material-ui/icons/Add";
 
 const Home = (props) => {
-  const [whatsAppId, setWhatsappId] = useState("019992323");
-  const [greetingRowAmount, setGreetingRowAmount] = useState(7);
-
+  const whatsAppID = "01927326";
+  const greetingRowAmount = 7;
+  const [startingText, setStartingText] = useState("");
   const [commandCardList, setCommandCardList] = useState([]);
 
   // Colors
@@ -50,6 +50,11 @@ const Home = (props) => {
     setCommandCardList(updatedCommandCardList);
   };
 
+  const handleStartingTextChange = (e) => {
+    const newStartingText = e.target.value;
+    setStartingText(newStartingText);
+  };
+
   const renderCommands = () => {
     const commands = commandCardList.map((element, index) => (
       <Grid item xs={12}>
@@ -65,15 +70,20 @@ const Home = (props) => {
   };
 
   const handleSave = () => {
-    console.log(commandCardList);
-    console.log(JSON.stringify(commandCardList));
+    // console.log(commandCardList);
+    // console.log(
+    //   JSON.stringify({ startingMessage: "", commands: commandCardList })
+    // );
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(commandCardList),
+      body: JSON.stringify({
+        startingMessage: startingText,
+        commands: commandCardList,
+      }),
     };
     fetch(
-      "http://localhost:8000/post-commands",
+      "https://azriel-whatsapp-api.herokuapp.com/post-commands",
       requestOptions
     ).then((response) => console.log(response.json()));
   };
@@ -82,7 +92,6 @@ const Home = (props) => {
     <Box
       height={200}
       width="100%"
-      //   display="flex"
       style={{
         margin: 0,
         position: "absolute",
@@ -99,9 +108,7 @@ const Home = (props) => {
         alignItems="flex-start"
         style={{
           position: "absolute",
-          // top: 0,
           backgroundColor: "white",
-          // margin: 0,
         }}
       >
         <Grid
@@ -113,10 +120,11 @@ const Home = (props) => {
           style={{ margin: 10 }}
         >
           <Grid item xs={12}>
-            <b>WhatsApp #{whatsAppId}</b>
+            <b>WhatsApp #{whatsAppID}</b>
           </Grid>
           <Grid item xs={12}>
             <TextField
+              onChange={(e) => handleStartingTextChange(e)}
               InputLabelProps={{ shrink: true }}
               fullWidth={true}
               id="outlined-multiline-static"

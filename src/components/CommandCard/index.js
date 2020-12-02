@@ -9,7 +9,6 @@ import {
 } from "@material-ui/core";
 import grey from "@material-ui/core/colors/grey";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { createMuiTheme } from "@material-ui/core/styles";
 import React, { useState } from "react";
 
 const CommandCard = ({
