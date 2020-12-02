@@ -66,6 +66,16 @@ const Home = (props) => {
 
   const handleSave = () => {
     console.log(commandCardList);
+    console.log(JSON.stringify(commandCardList));
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(commandCardList),
+    };
+    fetch(
+      "http://localhost:8000/post-commands",
+      requestOptions
+    ).then((response) => console.log(response.json()));
   };
 
   return (

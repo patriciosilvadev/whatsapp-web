@@ -47,7 +47,7 @@ const CommandCard = ({
             fullWidth={true}
             id="outlined-multiline-static"
             label="Command"
-            defaultValue={id + 1}
+            // defaultValue={id + 1}
             variant="outlined"
           />
         </Grid>
